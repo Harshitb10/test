@@ -1,0 +1,20 @@
+name: Slack Notification
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send-notification:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Send Slack notification
+        env:
+          SLACK_WEBHOOK_URL: ${{ https://hooks.slack.com/services/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 }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"A change has been made in the repository!"}' $SLACK_WEBHOOK_URL
